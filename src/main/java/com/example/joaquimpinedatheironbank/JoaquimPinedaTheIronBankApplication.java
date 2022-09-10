@@ -1,13 +1,20 @@
 package com.example.joaquimpinedatheironbank;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JoaquimPinedaTheIronBankApplication {
+public class JoaquimPinedaTheIronBankApplication  implements CommandLineRunner {
+
 
     public static void main(String[] args) {
         SpringApplication.run(JoaquimPinedaTheIronBankApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args){
+
     }
 
 }
