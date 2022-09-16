@@ -13,6 +13,12 @@ public class CreateUserRequest {
     String firstname;
     String lastname;
 
+    String role = "members";
+
+    public String getRole() {
+        return role.toUpperCase();
+    }
+
     public String ToString() {
         return "CreateUserRequest{" +
                 "username='" + username + '\'' +

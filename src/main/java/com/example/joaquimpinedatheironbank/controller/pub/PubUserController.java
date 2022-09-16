@@ -1,7 +1,9 @@
-package com.example.joaquimpinedatheironbank.controller;
+package com.example.joaquimpinedatheironbank.controller.pub;
 
 import com.example.joaquimpinedatheironbank.config.KeycloakProvider;
+import com.example.joaquimpinedatheironbank.dto.KeyClockUserRequest;
 import com.example.joaquimpinedatheironbank.entities.User;
+import com.example.joaquimpinedatheironbank.enums.UserRoles;
 import com.example.joaquimpinedatheironbank.http.requests.CreateUserRequest;
 import com.example.joaquimpinedatheironbank.http.requests.LoginRequest;
 import com.example.joaquimpinedatheironbank.http.requests.ValidateEmailRequest;
@@ -19,10 +21,11 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Response;
 
+
 @RestController
 @RequestMapping("/user")
 
-public class UserController {
+public class PubUserController {
 
     @Autowired
     EmailService emailService;
@@ -34,7 +37,7 @@ public class UserController {
     private final KeycloakProvider kcProvider;
 
 
-    public UserController(KeycloakAdminClientService kcAdminClient, KeycloakProvider kcProvider) {
+    public PubUserController(KeycloakAdminClientService kcAdminClient, KeycloakProvider kcProvider) {
         this.kcProvider = kcProvider;
         this.kcAdminClient = kcAdminClient;
     }
@@ -42,10 +45,9 @@ public class UserController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequest user) {
-        System.out.println(user.ToString());
-        Response createdResponse = kcAdminClient.createKeycloakUser(user, "members");
+        Response createdResponse = kcAdminClient.createKeycloakUser(KeyClockUserRequest.from(user), UserRoles.MEMBERS.name());
         return ResponseEntity.status(createdResponse.getStatus()).build();
-
+ //dhu2GAW.kuz2kdg2vhx
     }
 
 
@@ -61,9 +63,7 @@ public class UserController {
             } else if (user.getToken().equals(validateEmailRequest.getToken())) {
                 System.out.println("Token correcto");
                 user.setToken(null);
-/*
                 userService.save(user);
-*/
                 Response createdResponse = kcAdminClient.validateEmail(validateEmailRequest);
                 return ResponseEntity.status(createdResponse.getStatus()).build();
             }
@@ -74,6 +74,7 @@ public class UserController {
 
     @PostMapping("/get-token")
     public ResponseEntity<AccessTokenResponse> login(@NotNull @RequestBody LoginRequest loginRequest) {
+        System.out.println(loginRequest.getUsername());
         Keycloak keycloak = kcProvider.newKeycloakBuilderWithPasswordCredentials(loginRequest.getUsername(), loginRequest.getPassword()).build();
 
         AccessTokenResponse accessTokenResponse = null;
