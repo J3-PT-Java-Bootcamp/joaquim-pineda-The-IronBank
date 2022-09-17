@@ -20,6 +20,7 @@ public class User {
     private String name;
     private String Token;
     private String email;
+    private String userName;
 
  /*   @OneToMany
     @JoinColumn(name = "id")

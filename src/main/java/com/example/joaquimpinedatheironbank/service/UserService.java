@@ -11,4 +11,6 @@ public interface UserService {
     void save(User user);
 
     User findUserById(String autenticatedUser);
+
+    User findIfEmailExists(String email);
 }

@@ -38,6 +38,12 @@ public class UserServiceImpl implements UserService {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "User not found");
         }
     }
+
+    @Override
+    public User findIfEmailExists(String email) {
+        return userRepository.findIfEmailExists(email);
+
+    }
 }
 
 

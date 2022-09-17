@@ -19,8 +19,8 @@ public class AdminUser extends User {
     @Embedded
     private UserAddress address;
 
-    public AdminUser(String UUID, String name, String Token, String email,  UserAddress address) {
-        super(UUID, name, Token, email);
+    public AdminUser(String UUID, String name, String Token, String email,  UserAddress address, String userName) {
+        super(UUID, name, Token, email,userName);
         this.address = address;
     }
 }

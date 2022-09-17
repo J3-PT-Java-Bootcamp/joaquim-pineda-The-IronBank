@@ -79,7 +79,7 @@ public class KeycloakAdminClientService {
             List<UserRepresentation> userList = adminKeycloak.realm(realm).users().search(kcUser.getUsername());
             var createdUser = userList.get(0);
             log.info("User with id: " + createdUser.getId() + " created");
-            ClientUser userEntinty = new ClientUser(createdUser.getId(), createdUser.getFirstName(),  UUID.randomUUID().toString(),createdUser.getEmail(), UserAddress.toUserAddress(user1.getAddress()));
+            ClientUser userEntinty = new ClientUser(createdUser.getId(), createdUser.getFirstName(),  UUID.randomUUID().toString(),createdUser.getEmail(), UserAddress.toUserAddress(user1.getAddress()),createdUser.getUsername());
 
             userService.create(userEntinty);
             Email email = new Email(user1.getEmail(), "<html><body>please validate email <a href=\""+ constants.URL+"/user/validate?email=" + userEntinty.getEmail() + "&token=" + userEntinty.getToken() + "\">Validate</a><body></html> ", "Validate Email", "");
@@ -93,10 +93,10 @@ public class KeycloakAdminClientService {
     }
 
 
-    public Response validateEmail(ValidateEmailRequest user) {
+    public Response validateEmail(User user) {
         var adminKeycloak = kcProvider.getInstance();
         UsersResource usersResource = kcProvider.getInstance().realm(realm).users();
-        UserRepresentation test = usersResource.search(user.getEmail()).get(0);
+        UserRepresentation test = usersResource.search(user.getUserName()).get(0);
         test.setEmailVerified(true);
         usersResource.get(test.getId()).update(test);
         return Response.ok().build();

@@ -17,8 +17,8 @@ public class ClientUser extends User {
     @Embedded
     private UserAddress address;
 
-    public ClientUser(String UUID, String name, String Token, String email, UserAddress address) {
-        super(UUID, name, Token, email);
+    public ClientUser(String UUID, String name, String Token, String email, UserAddress address, String userName) {
+        super(UUID, name, Token, email,userName);
         this.address = address;
     }
 }

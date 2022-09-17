@@ -56,6 +56,7 @@ public class PubUserController {
             System.out.println(validateEmailRequest.getEmail());
             System.out.println(validateEmailRequest.getToken());
             User user = userService.findByEmail(validateEmailRequest.getEmail());
+
             if (user != null) {
                 if (user.getToken() == null) {
                     return ResponseEntity.status(HttpStatus.OK).body("Email already validated");
@@ -63,7 +64,7 @@ public class PubUserController {
                     System.out.println("Token correcto");
                     user.setToken(null);
                     userService.save(user);
-                    Response createdResponse = kcAdminClient.validateEmail(validateEmailRequest);
+                    Response createdResponse = kcAdminClient.validateEmail(user);
                     return ResponseEntity.status(createdResponse.getStatus()).build();
                 }
             }
