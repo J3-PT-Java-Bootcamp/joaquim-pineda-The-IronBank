@@ -1,6 +1,7 @@
 package com.example.joaquimpinedatheironbank.http.requests;
 
 
+import com.example.joaquimpinedatheironbank.entities.users.UserAddress;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +14,9 @@ public class CreateUserRequest {
     String firstname;
     String lastname;
 
+    UserAddressRequest address;
     String role = "members";
+
 
     public String getRole() {
         return role.toUpperCase();
@@ -26,6 +29,8 @@ public class CreateUserRequest {
                 ", email='" + email + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", address=" + address.toString() +
+
                 '}';
     }
 }

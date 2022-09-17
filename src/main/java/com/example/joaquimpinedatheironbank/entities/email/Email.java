@@ -1,4 +1,4 @@
-package com.example.joaquimpinedatheironbank.entities;
+package com.example.joaquimpinedatheironbank.entities.email;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

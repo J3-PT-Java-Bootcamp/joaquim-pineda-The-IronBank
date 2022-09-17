@@ -1,6 +1,9 @@
 package com.example.joaquimpinedatheironbank.dto;
 
-import com.example.joaquimpinedatheironbank.entities.*;
+import com.example.joaquimpinedatheironbank.entities.accounts.CheckingAccount;
+import com.example.joaquimpinedatheironbank.entities.accounts.CreditAccount;
+import com.example.joaquimpinedatheironbank.entities.accounts.SavingsAccount;
+import com.example.joaquimpinedatheironbank.entities.accounts.StudentAccount;
 import com.example.joaquimpinedatheironbank.enums.AccountType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -83,7 +86,6 @@ public class NewAccountDTO {
         studentAccount.setPrimaryOwner(primaryOwner);
         studentAccount.setSecondaryOwner(secondaryOwner);
         studentAccount.setType(accountType);
-        studentAccount.setPenaltyFee(penalityFee);
         studentAccount.setCreatedBy(autenticatedUser);
         return studentAccount;
 

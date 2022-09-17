@@ -1,8 +1,6 @@
 package com.example.joaquimpinedatheironbank.service;
 
-import com.example.joaquimpinedatheironbank.entities.User;
-
-import java.util.Optional;
+import com.example.joaquimpinedatheironbank.entities.users.User;
 
 public interface UserService {
 

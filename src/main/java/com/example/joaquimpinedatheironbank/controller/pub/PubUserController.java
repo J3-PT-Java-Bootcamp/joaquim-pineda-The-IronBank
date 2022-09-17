@@ -1,8 +1,7 @@
 package com.example.joaquimpinedatheironbank.controller.pub;
 
 import com.example.joaquimpinedatheironbank.config.KeycloakProvider;
-import com.example.joaquimpinedatheironbank.dto.KeyClockUserRequest;
-import com.example.joaquimpinedatheironbank.entities.User;
+import com.example.joaquimpinedatheironbank.entities.users.User;
 import com.example.joaquimpinedatheironbank.enums.UserRoles;
 import com.example.joaquimpinedatheironbank.http.requests.CreateUserRequest;
 import com.example.joaquimpinedatheironbank.http.requests.LoginRequest;
@@ -45,9 +44,8 @@ public class PubUserController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequest user) {
-        Response createdResponse = kcAdminClient.createKeycloakUser(KeyClockUserRequest.from(user), UserRoles.MEMBERS.name());
+        Response createdResponse = kcAdminClient.createKeycloakUser(user, UserRoles.MEMBERS.name());
         return ResponseEntity.status(createdResponse.getStatus()).build();
- //dhu2GAW.kuz2kdg2vhx
     }
 
 

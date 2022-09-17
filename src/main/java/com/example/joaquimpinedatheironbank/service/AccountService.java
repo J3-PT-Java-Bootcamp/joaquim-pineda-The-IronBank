@@ -1,11 +1,9 @@
 package com.example.joaquimpinedatheironbank.service;
 
 import com.example.joaquimpinedatheironbank.dto.NewAccountDTO;
-import com.example.joaquimpinedatheironbank.entities.Account;
-
-import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 public interface AccountService {
 
-    String createAccount(NewAccountDTO newAccountDTO, String autenticatedUser);
+    ResponseEntity<?> createAccount(NewAccountDTO newAccountDTO, String autenticatedUser);
 }

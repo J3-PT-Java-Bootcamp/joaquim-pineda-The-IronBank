@@ -7,6 +7,7 @@ import com.example.joaquimpinedatheironbank.service.AccountService;
 import com.example.joaquimpinedatheironbank.service.KeycloakAdminClientService;
 import com.example.joaquimpinedatheironbank.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -31,13 +32,10 @@ public class AccountController {
     }
 
     @PostMapping("/create")
-    public String createAccount(Principal principal, @RequestBody NewAccountDTO newAccountDTO) {
+    public ResponseEntity<?> createAccount(Principal principal, @RequestBody NewAccountDTO newAccountDTO) {
         UserAutorities autenticatedUser = kcAdminClient.getUser(principal.getName());
+       return accountService.createAccount(newAccountDTO, autenticatedUser.getUsername());
 
-        accountService.createAccount(newAccountDTO, autenticatedUser.getUsername());
-
-
-        return "createAccount";
     }
 
     @DeleteMapping("/delete")

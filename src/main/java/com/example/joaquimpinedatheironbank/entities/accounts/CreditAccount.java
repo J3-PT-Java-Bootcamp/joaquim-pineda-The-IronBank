@@ -1,4 +1,4 @@
-package com.example.joaquimpinedatheironbank.entities;
+package com.example.joaquimpinedatheironbank.entities.accounts;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +18,8 @@ public class CreditAccount extends Account {
     private BigDecimal creditLimit;
 
     private BigDecimal interestRate;
+
+    private BigDecimal penaltyFee;
 
 
 }

@@ -1,5 +1,6 @@
-package com.example.joaquimpinedatheironbank.entities;
+package com.example.joaquimpinedatheironbank.entities.accounts;
 
+import com.example.joaquimpinedatheironbank.entities.Money;
 import com.example.joaquimpinedatheironbank.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

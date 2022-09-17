@@ -1,12 +1,12 @@
-package com.example.joaquimpinedatheironbank.entities;
+package com.example.joaquimpinedatheironbank.entities.accounts;
 
+import com.example.joaquimpinedatheironbank.entities.accounts.Account;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
 
@@ -15,9 +15,8 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CheckingAccount extends Account {
+public class SavingsAccount extends Account {
 
-    private BigDecimal monthlyMaintenanceFee ;
-    private BigDecimal minimumBalance ;
+    private BigDecimal penaltyFee;
 
 }

@@ -1,6 +1,6 @@
 package com.example.joaquimpinedatheironbank.service;
 
-import com.example.joaquimpinedatheironbank.entities.Email;
+import com.example.joaquimpinedatheironbank.entities.email.Email;
 
 public interface EmailService {
 
