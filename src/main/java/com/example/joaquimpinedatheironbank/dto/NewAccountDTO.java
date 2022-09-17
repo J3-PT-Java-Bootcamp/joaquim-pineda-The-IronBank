@@ -38,7 +38,7 @@ public class NewAccountDTO {
 
     public SavingsAccount toSavingsAccount(String createdBy) {
         SavingsAccount savingsAccount = new SavingsAccount();
-        savingsAccount.setBalance(new Money(new BigDecimal(0)));
+        savingsAccount.setBalance(new BigDecimal(0));
         savingsAccount.setSecretKey(secretKey);
         savingsAccount.setPrimaryOwner(primaryOwner);
         savingsAccount.setSecondaryOwner(secondaryOwner);
@@ -50,7 +50,7 @@ public class NewAccountDTO {
 
     public CreditAccount toCreditAccount(String autenticatedUser) {
         CreditAccount creditAccount = new CreditAccount();
-        creditAccount.setBalance(new Money(new BigDecimal(0)));
+        creditAccount.setBalance(new BigDecimal(0));
         creditAccount.setSecretKey(secretKey);
         creditAccount.setPrimaryOwner(primaryOwner);
         creditAccount.setSecondaryOwner(secondaryOwner);
@@ -64,7 +64,7 @@ public class NewAccountDTO {
 
     public CheckingAccount toCheckingAccount(String autenticatedUser) {
         CheckingAccount checkingAccount = new CheckingAccount();
-        checkingAccount.setBalance(new Money(new BigDecimal(0)));
+        checkingAccount.setBalance(new BigDecimal(0));
         checkingAccount.setSecretKey(secretKey);
         checkingAccount.setPrimaryOwner(primaryOwner);
         checkingAccount.setSecondaryOwner(secondaryOwner);
@@ -78,7 +78,7 @@ public class NewAccountDTO {
 
     public StudentAccount toStudentAccount(String autenticatedUser) {
         StudentAccount studentAccount = new StudentAccount();
-        studentAccount.setBalance(new Money(new BigDecimal(0)));
+        studentAccount.setBalance(new BigDecimal(0));
         studentAccount.setSecretKey(secretKey);
         studentAccount.setPrimaryOwner(primaryOwner);
         studentAccount.setSecondaryOwner(secondaryOwner);

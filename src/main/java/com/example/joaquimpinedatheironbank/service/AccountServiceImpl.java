@@ -3,6 +3,7 @@ package com.example.joaquimpinedatheironbank.service;
 import com.example.joaquimpinedatheironbank.dto.NewAccountDTO;
 import com.example.joaquimpinedatheironbank.entities.*;
 import com.example.joaquimpinedatheironbank.repository.AccountRepository;
+import com.example.joaquimpinedatheironbank.repository.SavingsAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,12 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
+    private SavingsAccountRepository savingsAccountRepository;
+
 
 
     @Override
@@ -28,6 +35,7 @@ public class AccountServiceImpl implements AccountService {
         switch (newAccountDTO.getAccountType()) {
             case SAVINGS:
                 SavingsAccount savingsAccount =  newAccountDTO.toSavingsAccount(autenticatedUser);
+               savingsAccountRepository.save(savingsAccount);
                 return "Savings";
             case CREDIT:
                CreditAccount creditAccount =newAccountDTO.toCreditAccount(autenticatedUser);
@@ -42,4 +50,7 @@ public class AccountServiceImpl implements AccountService {
                 throw new IllegalArgumentException("Invalid account type");
         }
     }
+
+
+
 }

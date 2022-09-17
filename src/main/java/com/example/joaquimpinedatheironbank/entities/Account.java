@@ -25,8 +25,8 @@ public class Account implements AccountInterface{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @OneToOne
-    private Money balance;
+
+    private BigDecimal balance;
     private String SecretKey;
     private String PrimaryOwner;
     private String SecondaryOwner;
@@ -39,13 +39,13 @@ public class Account implements AccountInterface{
     @JoinColumn(name ="id")
     private List<Transaction> transactions;
 
-    @CreatedDate
+/*    @CreatedDate
     @Column(name = "created_at", nullable = false,updatable = false)
     private Instant creationDate;
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private Instant updateDate;
+    private Instant updateDate;*/
     private AccountStatus status;
 
 
