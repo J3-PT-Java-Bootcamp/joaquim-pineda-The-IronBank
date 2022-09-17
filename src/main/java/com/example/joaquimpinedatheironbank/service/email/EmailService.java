@@ -1,4 +1,4 @@
-package com.example.joaquimpinedatheironbank.service;
+package com.example.joaquimpinedatheironbank.service.email;
 
 import com.example.joaquimpinedatheironbank.entities.email.Email;
 

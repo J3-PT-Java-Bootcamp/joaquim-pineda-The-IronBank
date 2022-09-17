@@ -1,11 +1,13 @@
-package com.example.joaquimpinedatheironbank.service;
+package com.example.joaquimpinedatheironbank.service.account;
 
 import com.example.joaquimpinedatheironbank.dto.NewAccountDTO;
-import com.example.joaquimpinedatheironbank.entities.accounts.CheckingAccount;
-import com.example.joaquimpinedatheironbank.entities.accounts.CreditAccount;
-import com.example.joaquimpinedatheironbank.entities.accounts.SavingsAccount;
-import com.example.joaquimpinedatheironbank.entities.accounts.StudentAccount;
-import com.example.joaquimpinedatheironbank.repository.*;
+import com.example.joaquimpinedatheironbank.entities.accounts.*;
+import com.example.joaquimpinedatheironbank.repository.AccountRepository;
+import com.example.joaquimpinedatheironbank.repository.CheckingAccountRepository;
+import com.example.joaquimpinedatheironbank.repository.CreditAccountRepository;
+import com.example.joaquimpinedatheironbank.repository.SavingsAccountRepository;
+import com.example.joaquimpinedatheironbank.repository.StudentAccountRepository;
+import com.example.joaquimpinedatheironbank.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -61,6 +63,10 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    @Override
+    public Account findAccountNumber(String fromAccount) {
+        return accountRepository.findById(111L).orElseThrow(() -> new IllegalArgumentException("Account not found"));
+    }
 
 
 }

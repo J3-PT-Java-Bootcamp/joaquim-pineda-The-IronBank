@@ -1,4 +1,4 @@
-package com.example.joaquimpinedatheironbank.service;
+package com.example.joaquimpinedatheironbank.service.user;
 
 import com.example.joaquimpinedatheironbank.entities.users.User;
 import com.example.joaquimpinedatheironbank.repository.users.UserRepository;

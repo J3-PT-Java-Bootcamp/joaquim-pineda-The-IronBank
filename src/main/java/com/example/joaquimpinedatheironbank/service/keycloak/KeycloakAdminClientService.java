@@ -1,4 +1,4 @@
-package com.example.joaquimpinedatheironbank.service;
+package com.example.joaquimpinedatheironbank.service.keycloak;
 
 
 import com.example.joaquimpinedatheironbank.config.KeycloakProvider;
@@ -11,7 +11,8 @@ import com.example.joaquimpinedatheironbank.entities.users.User;
 import com.example.joaquimpinedatheironbank.entities.users.UserAddress;
 import com.example.joaquimpinedatheironbank.enums.UserRoles;
 import com.example.joaquimpinedatheironbank.http.requests.CreateUserRequest;
-import com.example.joaquimpinedatheironbank.http.requests.ValidateEmailRequest;
+import com.example.joaquimpinedatheironbank.service.email.EmailService;
+import com.example.joaquimpinedatheironbank.service.user.UserService;
 import lombok.extern.java.Log;
 import org.keycloak.admin.client.resource.UsersResource;
 import org.keycloak.representations.idm.CredentialRepresentation;

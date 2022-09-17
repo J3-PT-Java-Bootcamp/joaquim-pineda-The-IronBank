@@ -1,5 +1,6 @@
 package com.example.joaquimpinedatheironbank.dto;
 
+import com.example.joaquimpinedatheironbank.entities.Money;
 import com.example.joaquimpinedatheironbank.entities.accounts.CheckingAccount;
 import com.example.joaquimpinedatheironbank.entities.accounts.CreditAccount;
 import com.example.joaquimpinedatheironbank.entities.accounts.SavingsAccount;
@@ -36,12 +37,11 @@ public class NewAccountDTO {
     private BigDecimal creditLimit;
     private BigDecimal interestRate;
 
-
-
+    private final Money balance = new Money(new BigDecimal(0));
 
     public SavingsAccount toSavingsAccount(String createdBy) {
         SavingsAccount savingsAccount = new SavingsAccount();
-        savingsAccount.setBalance(new BigDecimal(0));
+        savingsAccount.setBalance(balance);
         savingsAccount.setSecretKey(secretKey);
         savingsAccount.setPrimaryOwner(primaryOwner);
         savingsAccount.setSecondaryOwner(secondaryOwner);
@@ -53,7 +53,7 @@ public class NewAccountDTO {
 
     public CreditAccount toCreditAccount(String autenticatedUser) {
         CreditAccount creditAccount = new CreditAccount();
-        creditAccount.setBalance(new BigDecimal(0));
+        creditAccount.setBalance(balance);
         creditAccount.setSecretKey(secretKey);
         creditAccount.setPrimaryOwner(primaryOwner);
         creditAccount.setSecondaryOwner(secondaryOwner);
@@ -67,7 +67,7 @@ public class NewAccountDTO {
 
     public CheckingAccount toCheckingAccount(String autenticatedUser) {
         CheckingAccount checkingAccount = new CheckingAccount();
-        checkingAccount.setBalance(new BigDecimal(0));
+        checkingAccount.setBalance(balance);
         checkingAccount.setSecretKey(secretKey);
         checkingAccount.setPrimaryOwner(primaryOwner);
         checkingAccount.setSecondaryOwner(secondaryOwner);
@@ -81,7 +81,7 @@ public class NewAccountDTO {
 
     public StudentAccount toStudentAccount(String autenticatedUser) {
         StudentAccount studentAccount = new StudentAccount();
-        studentAccount.setBalance(new BigDecimal(0));
+        studentAccount.setBalance(balance);
         studentAccount.setSecretKey(secretKey);
         studentAccount.setPrimaryOwner(primaryOwner);
         studentAccount.setSecondaryOwner(secondaryOwner);
