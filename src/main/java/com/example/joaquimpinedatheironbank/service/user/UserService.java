@@ -10,7 +10,6 @@ public interface UserService {
 
     void save(User user);
 
-    User findUserById(String autenticatedUser);
+    User findUserById(String id);
 
-    User findIfEmailExists(String email);
 }

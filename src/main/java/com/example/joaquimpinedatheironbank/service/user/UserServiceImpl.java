@@ -13,7 +13,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 
-
     @Override
     public void create(User user) {
         userRepository.save(user);
@@ -39,11 +38,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public User findIfEmailExists(String email) {
-        return userRepository.findIfEmailExists(email);
 
-    }
 }
 
 

@@ -10,10 +10,10 @@ import com.example.joaquimpinedatheironbank.service.account.AccountService;
 import com.example.joaquimpinedatheironbank.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 
 @Service
@@ -27,16 +27,19 @@ public class TransactionsServiceImpl implements TransactionsService {
 
 
     @Override
-    @Transactional
-    public void transferMoney(MoneyTransferRequest moneyTransferRequest) {
+    public ResponseEntity<?> transferMoney(String idOfOwner, MoneyTransferRequest moneyTransferRequest) throws HttpClientErrorException {
         Account from = accountService.findAccountNumber(moneyTransferRequest.getFromAccount());
+        if(!idOfOwner.trim().equalsIgnoreCase(from.getPrimaryOwner())){
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,"You can't transfer money not your MONEYYYY!");
+        }
+
 
         if(from == null) {
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Account not found");
         }
         User fromUser = userService.findUserById(from.getPrimaryOwner());
 
-        if(from.getBalance().getAmount().compareTo(moneyTransferRequest.getAmount()) >= 0) {
+        if(from.getBalance().getAmount().equals(0) || from.getBalance().getAmount().compareTo(moneyTransferRequest.getAmount()) <= 0) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Insufficient funds");
         }
         if(fromUser.getName().trim().equalsIgnoreCase(moneyTransferRequest.getOwnerOfToAccount().trim())) {
@@ -61,6 +64,9 @@ public class TransactionsServiceImpl implements TransactionsService {
         );
 
 
+
+
+    return ResponseEntity.ok(to);
 
     }
 

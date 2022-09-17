@@ -81,7 +81,6 @@ public class KeycloakAdminClientService {
             var createdUser = userList.get(0);
             log.info("User with id: " + createdUser.getId() + " created");
             ClientUser userEntinty = new ClientUser(createdUser.getId(), createdUser.getFirstName(),  UUID.randomUUID().toString(),createdUser.getEmail(), UserAddress.toUserAddress(user1.getAddress()),createdUser.getUsername());
-
             userService.create(userEntinty);
             Email email = new Email(user1.getEmail(), "<html><body>please validate email <a href=\""+ constants.URL+"/user/validate?email=" + userEntinty.getEmail() + "&token=" + userEntinty.getToken() + "\">Validate</a><body></html> ", "Validate Email", "");
             emailService.SendSimpleMail(email);

@@ -9,4 +9,6 @@ public interface AccountService {
     ResponseEntity<?> createAccount(NewAccountDTO newAccountDTO, String autenticatedUser);
 
     Account findAccountNumber(String fromAccount);
+
+    Account updateAccount(Account from);
 }
