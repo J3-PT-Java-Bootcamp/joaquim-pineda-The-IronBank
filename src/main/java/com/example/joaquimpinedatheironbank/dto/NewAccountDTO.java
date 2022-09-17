@@ -87,6 +87,8 @@ public class NewAccountDTO {
         studentAccount.setSecondaryOwner(secondaryOwner);
         studentAccount.setType(accountType);
         studentAccount.setCreatedBy(autenticatedUser);
+        studentAccount.setMinimumBalance(minimumBalance);
+        studentAccount.setMonthlyMaintenanceFee(monthlyMaintenanceFee);
         return studentAccount;
 
     }

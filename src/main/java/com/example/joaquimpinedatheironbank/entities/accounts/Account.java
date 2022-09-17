@@ -25,7 +25,7 @@ public class Account implements AccountInterface {
     private UUID id;
     @GenericGenerator(name = "AccountNumber", strategy = "com.example.joaquimpinedatheironbank.utils.AccountNumberGenerator")
     @GeneratedValue(generator = "AccountNumber")
-    private String accountNumber = "00000000";
+    private String accountNumber;
     private BigDecimal balance;
     private String SecretKey;
     private String PrimaryOwner;
