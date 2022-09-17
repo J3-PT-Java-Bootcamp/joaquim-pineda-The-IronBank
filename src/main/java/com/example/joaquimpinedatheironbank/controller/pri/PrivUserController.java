@@ -46,7 +46,6 @@ public class PrivUserController {
     @PostMapping(value = "/create")
     public ResponseEntity<?> createUser(Principal principal, @RequestBody CreateUserRequest user) {
 
-        kcProvider.clientID = principal.getName();
         UserAutorities autenticatedUser = kcAdminClient.getUser(principal.getName());
 
         if (user.getRole().equals(UserRoles.ADMINS.name().toUpperCase()) && autenticatedUser.getRole().stream().anyMatch(x -> x.equals(UserRoles.ADMINS.name()))) {
@@ -66,38 +65,4 @@ public class PrivUserController {
     }
 
 
-    @GetMapping(value = "validate")
-    public ResponseEntity<?> validateEmail(@RequestParam String email, @RequestParam String token) {
-        ValidateEmailRequest validateEmailRequest = new ValidateEmailRequest(email, token);
-        System.out.println(validateEmailRequest.getEmail());
-        System.out.println(validateEmailRequest.getToken());
-        User user = userService.findByEmail(validateEmailRequest.getEmail());
-        if (user != null) {
-            if (user.getToken() == null) {
-                return ResponseEntity.status(HttpStatus.OK).build();
-            } else if (user.getToken().equals(validateEmailRequest.getToken())) {
-                System.out.println("Token correcto");
-                user.setToken(null);
-                userService.save(user);
-                Response createdResponse = kcAdminClient.validateEmail(validateEmailRequest);
-                return ResponseEntity.status(createdResponse.getStatus()).build();
-            }
-        }
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
-
-    @PostMapping("/get-token")
-    public ResponseEntity<AccessTokenResponse> login(@NotNull @RequestBody LoginRequest loginRequest) {
-        Keycloak keycloak = kcProvider.newKeycloakBuilderWithPasswordCredentials(loginRequest.getUsername(), loginRequest.getPassword()).build();
-
-        AccessTokenResponse accessTokenResponse = null;
-        try {
-            accessTokenResponse = keycloak.tokenManager().getAccessToken();
-            return ResponseEntity.status(HttpStatus.OK).body(accessTokenResponse);
-        } catch (BadRequestException ex) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(accessTokenResponse);
-        }
-
-    }
 }
