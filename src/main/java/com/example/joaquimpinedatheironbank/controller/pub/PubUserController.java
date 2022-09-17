@@ -53,21 +53,26 @@ public class PubUserController {
 
     @GetMapping(value = "validate")
     public ResponseEntity<?> validateEmail(@RequestParam String email, @RequestParam String token) {
-        ValidateEmailRequest validateEmailRequest = new ValidateEmailRequest(email, token);
-        System.out.println(validateEmailRequest.getEmail());
-        System.out.println(validateEmailRequest.getToken());
-        User user = userService.findByEmail(validateEmailRequest.getEmail());
-        if (user != null) {
-            if (user.getToken() == null) {
-                return ResponseEntity.status(HttpStatus.OK).build();
-            } else if (user.getToken().equals(validateEmailRequest.getToken())) {
-                System.out.println("Token correcto");
-                user.setToken(null);
-                userService.save(user);
-                Response createdResponse = kcAdminClient.validateEmail(validateEmailRequest);
-                return ResponseEntity.status(createdResponse.getStatus()).build();
+        try{
+            ValidateEmailRequest validateEmailRequest = new ValidateEmailRequest(email, token);
+            System.out.println(validateEmailRequest.getEmail());
+            System.out.println(validateEmailRequest.getToken());
+            User user = userService.findByEmail(validateEmailRequest.getEmail());
+            if (user != null) {
+                if (user.getToken() == null) {
+                    return ResponseEntity.status(HttpStatus.OK).body("Email already validated");
+                } else if (user.getToken().equals(validateEmailRequest.getToken())) {
+                    System.out.println("Token correcto");
+                    user.setToken(null);
+                    userService.save(user);
+                    Response createdResponse = kcAdminClient.validateEmail(validateEmailRequest);
+                    return ResponseEntity.status(createdResponse.getStatus()).build();
+                }
             }
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }

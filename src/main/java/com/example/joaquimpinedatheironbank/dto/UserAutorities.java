@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public class UserAutorities {
     private String username;
-    private ArrayList<String> role;
+    private final ArrayList<String> role;
 
     public UserAutorities(String username, ArrayList<String> role) {
         this.username = username;

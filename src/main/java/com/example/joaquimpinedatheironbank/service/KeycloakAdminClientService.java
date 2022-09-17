@@ -77,7 +77,7 @@ public class KeycloakAdminClientService {
             List<UserRepresentation> userList = adminKeycloak.realm(realm).users().search(kcUser.getUsername());
             var createdUser = userList.get(0);
             log.info("User with id: " + createdUser.getId() + " created");
-            User userEntinty = new User(createdUser.getId(), createdUser.getFirstName(), createdUser.getEmail(), UUID.randomUUID().toString());
+            User userEntinty = new User(createdUser.getId(), createdUser.getFirstName(), createdUser.getEmail(), UUID.randomUUID().toString(),null);
             userService.create(userEntinty);
             Email email = new Email(user.getEmail(), "<html><body>please validate email <a href=\""+ constants.URL+"/user/validate?email=" + userEntinty.getEmail() + "&token=" + userEntinty.getToken() + "\">Validate</a><body></html> ", "Validate Email", "");
             emailService.SendSimpleMail(email);

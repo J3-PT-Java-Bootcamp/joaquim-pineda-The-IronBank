@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Optional;
 
 @Entity
 @NoArgsConstructor
@@ -17,11 +17,12 @@ import javax.persistence.Id;
 @Setter
 public class User {
     @Id
-    String UUID;
-    String name;
-    String email;
-    String token;
+    private String UUID;
+    private String name;
+    private String email;
+    private String token;
 
-
-
+    @OneToMany
+    @JoinColumn(name = "id")
+    public List<Account> accounts;
 }

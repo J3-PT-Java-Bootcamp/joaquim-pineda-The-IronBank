@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/priv/user")
+@RequestMapping("/pri/user")
 public class PrivUserController {
 
     @Autowired

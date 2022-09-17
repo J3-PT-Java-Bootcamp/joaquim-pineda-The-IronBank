@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import java.math.BigDecimal;
 
 
@@ -16,13 +15,9 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "checkingAccount")
 public class CheckingAccount extends Account {
 
-    @OneToOne
-    private Money monthlyMaintenanceFee = new Money(new BigDecimal("0"));
-    @OneToOne
-    private Money minimumBalance = new Money(new BigDecimal("12.4"));
-
+    private BigDecimal monthlyMaintenanceFee ;
+    private BigDecimal minimumBalance ;
 
 }
