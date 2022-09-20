@@ -1,11 +1,11 @@
 package com.example.joaquimpinedatheironbank.entities.accounts;
 
 import com.example.joaquimpinedatheironbank.entities.Money;
+import com.example.joaquimpinedatheironbank.entities.transaction.Transaction;
 import com.example.joaquimpinedatheironbank.enums.AccountStatus;
 import com.example.joaquimpinedatheironbank.enums.AccountType;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -41,9 +41,13 @@ public class Account implements AccountInterface {
     private AccountStatus status = AccountStatus.ACTIVE;
 
 
-    @OneToMany
-    @JoinColumn(name = "id")
-    private List<Transaction> transactions;
+    @OneToMany(mappedBy = "originAccount", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Transaction> from;
+
+    @OneToMany(mappedBy = "destinationAccount")
+    @JsonIgnore
+    private List<Transaction> to;
 
 
     /*    @CreatedDate
@@ -53,17 +57,7 @@ public class Account implements AccountInterface {
         @LastModifiedDate
         @Column(name = "updated_at")
         private Instant updateDate;*/
-    public Account( Money balance, String secretKey, String primaryOwner, String secondaryOwner, AccountType type, String createdBy, AccountStatus status, List<Transaction> transactions) {
-        this.accountNumber = new Random().nextInt(1000000000)+ "";
-        this.balance = balance;
-        SecretKey = secretKey;
-        PrimaryOwner = primaryOwner;
-        SecondaryOwner = secondaryOwner;
-        Type = type;
-        CreatedBy = createdBy;
-        this.status = status;
-        this.transactions = transactions;
-    }
+
 
     public Account() {
         this.accountNumber = new Random().nextInt(1000000000)+ "";
@@ -77,9 +71,7 @@ public class Account implements AccountInterface {
     public void addBalance(BigDecimal amount){
         this.setBalance(new Money(this.getBalance().getAmount().add(amount)));
     }
-    public void addTransaction(Transaction transaction){
-        this.transactions.add(transaction);
-    }
+
 
 
 
