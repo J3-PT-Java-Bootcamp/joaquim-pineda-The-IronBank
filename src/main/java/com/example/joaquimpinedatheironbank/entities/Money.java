@@ -1,6 +1,7 @@
 package com.example.joaquimpinedatheironbank.entities;
 
 import javax.persistence.Embeddable;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
@@ -14,6 +15,7 @@ public class Money {
     private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 
     private final Currency currency;
+    @Min(0)
     private BigDecimal amount;
 
     /**

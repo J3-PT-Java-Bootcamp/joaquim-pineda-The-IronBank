@@ -2,6 +2,7 @@ package com.example.joaquimpinedatheironbank.service.account;
 
 import com.example.joaquimpinedatheironbank.dto.NewAccountDTO;
 import com.example.joaquimpinedatheironbank.entities.accounts.*;
+import com.example.joaquimpinedatheironbank.http.requests.EditAccountRequest;
 import com.example.joaquimpinedatheironbank.repository.CheckingAccountRepository;
 import com.example.joaquimpinedatheironbank.repository.CreditAccountRepository;
 import com.example.joaquimpinedatheironbank.repository.SavingsAccountRepository;
@@ -11,6 +12,9 @@ import com.example.joaquimpinedatheironbank.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -48,7 +52,6 @@ public class AccountServiceImpl implements AccountService {
             case CREDIT:
                CreditAccount creditAccount =newAccountDTO.toCreditAccount(autenticatedUser);
                 creditAccountRepository.save(creditAccount);
-
                 return ResponseEntity.ok(creditAccount);
             case CHECKING:
                 CheckingAccount checkingAccount = newAccountDTO.toCheckingAccount(autenticatedUser);
@@ -64,13 +67,41 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account findAccountNumber(String fromAccount) {
-        return accountRepository.findByAccountNumber(fromAccount).orElseThrow(() -> new IllegalArgumentException("Account not found"));
+    public Optional<Account> findAccountNumber(String fromAccount) {
+        return accountRepository.findByAccountNumber(fromAccount);
     }
 
     @Override
-    public Account updateAccount(Account account) {
-        return accountRepository.save(account);
+    public Account updateAccount(EditAccountRequest account) {
+
+        switch (account.getAccountType()) {
+            case SAVINGS:
+                return savingsAccountRepository.save((SavingsAccount) account.toSavingAccount());
+            case CREDIT:
+                return creditAccountRepository.save((CreditAccount) account.toCreditAccount());
+            case CHECKING:
+                return checkingAccountRepository.save((CheckingAccount) account.toCheckingAccount());
+            case STUDENT:
+                return studentAccountRepository.save((StudentAccount) account.toStudentAccount());
+            default:
+                throw new IllegalArgumentException("Invalid account type");
+        }
+
+    }
+
+    @Override
+    public void save(Account from) {
+        accountRepository.save(from);
+    }
+
+    @Override
+    public List<Account> findAllAccounts() {
+        return accountRepository.findAll();
+    }
+
+    @Override
+    public List<Account> findAccountsOfUser(String id) {
+        return accountRepository.findByAccountOwnersId(id);
     }
 
 

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -21,8 +23,11 @@ public class Transaction {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    @Type(type = "uuid-char")
+    private UUID id;
     @Enumerated(EnumType.STRING)
     private TransactionType type;
 
@@ -31,6 +36,8 @@ public class Transaction {
 
     @ManyToOne (fetch = FetchType.LAZY)
     private Account destinationAccount;
+
+    private String externalDestinationAccount;
     private String description;
     private Money amount;
     private Instant transactionDate;

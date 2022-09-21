@@ -3,7 +3,8 @@ package com.example.joaquimpinedatheironbank.enums;
 public enum TransactionType {
     DEPOSIT,
     WITHDRAWAL,
-    TRANSFER,
+    INTERNALTRANSFER,
+    EXTERNALTRANSFER,
     PAYMENT,
 
 

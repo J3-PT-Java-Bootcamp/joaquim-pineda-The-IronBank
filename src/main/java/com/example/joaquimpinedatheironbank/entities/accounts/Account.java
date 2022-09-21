@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,11 +21,13 @@ import java.util.UUID;
 @Getter
 @Setter
 public class Account implements AccountInterface {
-
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    @Type(type = "uuid-char")
     private UUID id;
+
     @GenericGenerator(name = "AccountNumber", strategy = "com.example.joaquimpinedatheironbank.utils.AccountNumberGenerator")
     @GeneratedValue(generator = "AccountNumber")
     private String accountNumber;
@@ -72,8 +75,15 @@ public class Account implements AccountInterface {
         this.setBalance(new Money(this.getBalance().getAmount().add(amount)));
     }
 
-
-
+    public boolean isFrozen(){
+        return this.status == AccountStatus.FROZEN;
+    }
+    public boolean isActive(){
+        return this.status == AccountStatus.ACTIVE;
+    }
+    public boolean isClosed(){
+        return this.status == AccountStatus.CLOSED;
+    }
 
 
 }
