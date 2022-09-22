@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.checkerframework.checker.units.qual.Length;
+import org.checkerframework.common.value.qual.MinLen;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -15,6 +18,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ThirdPartyUser extends User {
+@Size(min = 24, max = 24)
     private String hashedKey;
 
     public ThirdPartyUser(String id, TypeOfUser typeOfUser, String Token, String email, String userName, String hashedKey) {
