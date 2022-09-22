@@ -6,9 +6,10 @@ import com.example.joaquimpinedatheironbank.constants.constants;
 import com.example.joaquimpinedatheironbank.dto.KeyClockUserRequest;
 import com.example.joaquimpinedatheironbank.dto.UserAutorities;
 import com.example.joaquimpinedatheironbank.entities.email.Email;
-import com.example.joaquimpinedatheironbank.entities.users.ClientUser;
+import com.example.joaquimpinedatheironbank.entities.users.AccountHolder;
 import com.example.joaquimpinedatheironbank.entities.users.User;
 import com.example.joaquimpinedatheironbank.entities.users.UserAddress;
+import com.example.joaquimpinedatheironbank.enums.TypeOfUser;
 import com.example.joaquimpinedatheironbank.enums.UserRoles;
 import com.example.joaquimpinedatheironbank.http.requests.CreateUserRequest;
 import com.example.joaquimpinedatheironbank.service.email.EmailService;
@@ -56,7 +57,7 @@ public class KeycloakAdminClientService {
     }
 
     public Response createKeycloakUser(CreateUserRequest user1, String group) {
-        KeyClockUserRequest userRequest =  KeyClockUserRequest.from(user1);
+        KeyClockUserRequest userRequest = KeyClockUserRequest.from(user1);
         var adminKeycloak = kcProvider.getInstance();
         UsersResource usersResource = kcProvider.getInstance().realm(realm).users();
         CredentialRepresentation credentialRepresentation = createPasswordCredentials(userRequest.getPassword());
@@ -72,17 +73,27 @@ public class KeycloakAdminClientService {
         kcUser.setGroups(List.of(group));
 
 
-
-
         Response response = usersResource.create(kcUser);
 
         if (response.getStatus() == 201) {
             List<UserRepresentation> userList = adminKeycloak.realm(realm).users().search(kcUser.getUsername());
             var createdUser = userList.get(0);
             log.info("User with id: " + createdUser.getId() + " created");
-            ClientUser userEntinty = new ClientUser(createdUser.getId(), createdUser.getFirstName(),  UUID.randomUUID().toString(),createdUser.getEmail(), UserAddress.toUserAddress(user1.getAddress()),createdUser.getUsername());
+            String token = UUID.randomUUID().toString();
+
+            AccountHolder userEntinty = new AccountHolder();
+            userEntinty.setId(createdUser.getId());
+            userEntinty.setToken(token);
+            userEntinty.setEmail(userRequest.getEmail());
+            userEntinty.setFirstName(userRequest.getFirstname());
+            userEntinty.setLastName(userRequest.getLastname());
+            userEntinty.setUserName(userRequest.getUsername());
+            userEntinty.setAddress(new UserAddress());
+            userEntinty.setBirthDate("01/01/2000");
+            userEntinty.setTypeOfUser(TypeOfUser.ADMIN);
+
             userService.create(userEntinty);
-            Email email = new Email(user1.getEmail(), "<html><body>please validate email <a href=\""+ constants.URL+"/user/validate?email=" + userEntinty.getEmail() + "&token=" + userEntinty.getToken() + "\">Validate</a><body></html> ", "Validate Email", "");
+            Email email = new Email(user1.getEmail(), "<html><body>please validate email <a href=\"" + constants.URL + "/user/validate?email=" + userEntinty.getEmail() + "&token=" + token + "\">Validate</a><body></html> ", "Validate Email", "");
             emailService.SendSimpleMail(email);
 //            TODO you may add you logic to store and connect the keycloak user to the local user here
 
@@ -121,7 +132,7 @@ public class KeycloakAdminClientService {
             }
         });
 
-           return new UserAutorities(userId,roles);
+        return new UserAutorities(userId, roles);
 
 
     }
