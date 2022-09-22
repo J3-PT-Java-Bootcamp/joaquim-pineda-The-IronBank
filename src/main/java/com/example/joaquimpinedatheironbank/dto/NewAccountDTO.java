@@ -46,7 +46,6 @@ public class NewAccountDTO {
         savingsAccount.setPrimaryOwner(primaryOwner);
         savingsAccount.setSecondaryOwner(secondaryOwner);
         savingsAccount.setType(accountType);
-        savingsAccount.setPenaltyFee(penalityFee);
         savingsAccount.setCreatedBy(createdBy);
         return savingsAccount;
     }
@@ -58,7 +57,6 @@ public class NewAccountDTO {
         creditAccount.setPrimaryOwner(primaryOwner);
         creditAccount.setSecondaryOwner(secondaryOwner);
         creditAccount.setType(accountType);
-        creditAccount.setPenaltyFee(penalityFee);
         creditAccount.setCreatedBy(autenticatedUser);
         creditAccount.setCreditLimit(creditLimit);
         creditAccount.setInterestRate(interestRate);

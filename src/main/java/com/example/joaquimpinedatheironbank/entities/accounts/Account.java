@@ -5,6 +5,7 @@ import com.example.joaquimpinedatheironbank.entities.transaction.Transaction;
 import com.example.joaquimpinedatheironbank.enums.AccountStatus;
 import com.example.joaquimpinedatheironbank.enums.AccountType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -61,6 +62,18 @@ public class Account implements AccountInterface {
         @Column(name = "updated_at")
         private Instant updateDate;*/
 
+    public Account(String accountNumber, Money balance, String secretKey, String primaryOwner, String secondaryOwner, AccountType type, String createdBy, AccountStatus status, List<Transaction> from, List<Transaction> to) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+        SecretKey = secretKey;
+        PrimaryOwner = primaryOwner;
+        SecondaryOwner = secondaryOwner;
+        Type = type;
+        CreatedBy = createdBy;
+        this.status = status;
+        this.from = from;
+        this.to = to;
+    }
 
     public Account() {
         this.accountNumber = new Random().nextInt(1000000000)+ "";

@@ -55,7 +55,6 @@ public class EditAccountRequest {
         savingsAccount.setSecondaryOwner(secondaryOwner);
         savingsAccount.setType(accountType);
         savingsAccount.setCreatedBy(createdBy);
-        savingsAccount.setPenaltyFee(penalityFee);
         return savingsAccount;
     }
 
@@ -69,7 +68,6 @@ public class EditAccountRequest {
         creditAccount.setSecondaryOwner(secondaryOwner);
         creditAccount.setType(accountType);
         creditAccount.setCreatedBy(createdBy);
-        creditAccount.setPenaltyFee(penalityFee);
         creditAccount.setCreditLimit(creditLimit);
         creditAccount.setInterestRate(interestRate);
         return creditAccount;
