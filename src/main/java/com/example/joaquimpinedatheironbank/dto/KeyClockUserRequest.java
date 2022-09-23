@@ -20,8 +20,8 @@ public class KeyClockUserRequest {
         return new KeyClockUserRequest(
                 createUserRequest.getUsername(),
                 createUserRequest.getEmail(),
-                createUserRequest.getFirstname(),
-                createUserRequest.getLastname(),
+                createUserRequest.getFirstName(),
+                createUserRequest.getLastName(),
                 createUserRequest.getPassword()
         );
     }

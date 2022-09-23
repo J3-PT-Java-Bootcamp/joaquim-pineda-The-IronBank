@@ -92,7 +92,18 @@ public class KeycloakAdminClientService {
             userEntinty.setBirthDate("01/01/2000");
             userEntinty.setTypeOfUser(TypeOfUser.ADMIN);
 
-            userService.create(userEntinty);
+            userService.create(
+                    userEntinty.getId(),
+                   token,
+                    user1.getEmail(),
+                    user1.getUsername(),
+                    user1.getTypeOfUser(),
+                    user1.getHashedKey(),
+                    user1.getAddress(),
+                    user1.getBirthDate(),
+                    user1.getFirstName(),
+                    user1.getLastName()
+            );
             Email email = new Email(user1.getEmail(), "<html><body>please validate email <a href=\"" + constants.URL + "/user/validate?email=" + userEntinty.getEmail() + "&token=" + token + "\">Validate</a><body></html> ", "Validate Email", "");
             emailService.SendSimpleMail(email);
 //            TODO you may add you logic to store and connect the keycloak user to the local user here

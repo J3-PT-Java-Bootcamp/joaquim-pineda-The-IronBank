@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ThirdPartyUserRepository extends JpaRepository<ThirdPartyUser, String> {
 
-    ThirdPartyUser save(ThirdPartyUser user);
+    ThirdPartyUser save(ThirdPartyUser thirdPartyUser);
 
 
 

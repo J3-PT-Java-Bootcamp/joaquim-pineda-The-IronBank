@@ -18,7 +18,5 @@ public class UserAddress {
     private String country;
 
 
-    public static UserAddress toUserAddress(UserAddressRequest userAddressRequest) {
-        return new UserAddress(userAddressRequest.getStreet(), userAddressRequest.getCity(), userAddressRequest.getState(), userAddressRequest.getZipCode(), userAddressRequest.getCountry());
-    }
+
 }

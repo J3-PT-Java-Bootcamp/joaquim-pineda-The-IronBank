@@ -3,11 +3,8 @@ package com.example.joaquimpinedatheironbank.service.account;
 import com.example.joaquimpinedatheironbank.dto.NewAccountDTO;
 import com.example.joaquimpinedatheironbank.entities.accounts.*;
 import com.example.joaquimpinedatheironbank.http.requests.EditAccountRequest;
-import com.example.joaquimpinedatheironbank.repository.CheckingAccountRepository;
-import com.example.joaquimpinedatheironbank.repository.CreditAccountRepository;
-import com.example.joaquimpinedatheironbank.repository.SavingsAccountRepository;
-import com.example.joaquimpinedatheironbank.repository.StudentAccountRepository;
-import com.example.joaquimpinedatheironbank.repository.accounts.AccountRepository;
+
+import com.example.joaquimpinedatheironbank.repository.accounts.*;
 import com.example.joaquimpinedatheironbank.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

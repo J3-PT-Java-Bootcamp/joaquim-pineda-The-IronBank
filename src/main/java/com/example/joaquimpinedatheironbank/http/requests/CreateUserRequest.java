@@ -2,6 +2,7 @@ package com.example.joaquimpinedatheironbank.http.requests;
 
 
 import com.example.joaquimpinedatheironbank.entities.users.UserAddress;
+import com.example.joaquimpinedatheironbank.enums.TypeOfUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,11 +12,17 @@ public class CreateUserRequest {
     String username;
     String password;
     String email;
-    String firstname;
-    String lastname;
+    String firstName;
+    String lastName;
 
-    UserAddressRequest address;
+    UserAddress address;
     String role = "members";
+
+    TypeOfUser typeOfUser;
+    String hashedKey;
+    String birthDate;
+
+
 
 
     public String getRole() {
@@ -27,10 +34,12 @@ public class CreateUserRequest {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", firstname='" + firstName + '\'' +
+                ", lastname='" + lastName + '\'' +
                 ", address=" + address.toString() +
 
                 '}';
     }
+
+
 }

@@ -21,8 +21,8 @@ public class AccountHolder extends User {
     private String firstName;
     private String lastName;
 
-    public AccountHolder(String id, TypeOfUser typeOfUser, String Token, String email, String userName, UserAddress address, String birthDate, String firstName, String lastName) {
-        super(id, typeOfUser, Token, email, userName);
+    public AccountHolder(String id, TypeOfUser typeOfUser, String token, String email, String userName, UserAddress address, String birthDate, String firstName, String lastName) {
+        super(id, typeOfUser, token, email, userName);
         this.address = address;
         this.birthDate = birthDate;
         this.firstName = firstName;

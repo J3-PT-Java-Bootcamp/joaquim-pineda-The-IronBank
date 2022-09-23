@@ -24,6 +24,7 @@ public class User {
     private String Token;
     private String email;
     private String userName;
+    @Enumerated(EnumType.STRING)
     private TypeOfUser typeOfUser;
     public User(String id,TypeOfUser typeOfUser, String Token, String email,String userName) {
         this.id = id;
