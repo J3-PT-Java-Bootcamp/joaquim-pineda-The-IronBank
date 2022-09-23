@@ -22,7 +22,7 @@ import java.util.List;
 public class SavingsAccount extends Account {
     @Min(0)
     private final BigDecimal penaltyFee = new BigDecimal(40);
-    private Instant lastFee;
+    private Instant lastFee = Instant.now();
 
     public SavingsAccount(String accountNumber, Money balance, String SecretKey, String PrimaryOwner, String SecondaryOwner, AccountType Type, String CreatedBy, AccountStatus status, List<Transaction> from, List<Transaction> to) {
         super(accountNumber, balance, SecretKey, PrimaryOwner, SecondaryOwner, Type, CreatedBy, status, from, to);

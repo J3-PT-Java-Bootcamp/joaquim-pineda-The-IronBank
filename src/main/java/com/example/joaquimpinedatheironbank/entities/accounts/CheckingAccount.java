@@ -19,7 +19,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 public class CheckingAccount extends Account {
     @Min(0)
@@ -29,14 +28,17 @@ public class CheckingAccount extends Account {
     @Min(0)
     private BigDecimal penaltyFee ;
 
-    private Instant lastFee;
-    private Instant lastMinimumBalance;
+    private Instant lastFee = Instant.now();
+    private boolean lastMinimumBalance = false;
+
 
     public CheckingAccount(String accountNumber, Money balance, String secretKey, String primaryOwner, String secondaryOwner, AccountType type, String createdBy, AccountStatus status, List<Transaction> from, List<Transaction> to, BigDecimal monthlyMaintenanceFee, BigDecimal minimumBalance, BigDecimal penaltyFee) {
         super(accountNumber, balance, secretKey, primaryOwner, secondaryOwner, type, createdBy, status, from, to);
         this.monthlyMaintenanceFee = monthlyMaintenanceFee;
         this.minimumBalance = minimumBalance;
         this.penaltyFee = penaltyFee;
+        this.lastFee= Instant.now();
+        this.lastMinimumBalance= false;
     }
 
     public void checkCheckingAccount() {
@@ -44,12 +46,20 @@ public class CheckingAccount extends Account {
         if (now.isAfter(lastFee.plusSeconds(1*60*60*24*30))) {
             if (balance.getAmount().compareTo(minimumBalance) < 0) {
                 balance.setAmount(balance.getAmount().subtract(monthlyMaintenanceFee));
-                lastFee = now;
+                lastFee = Instant.now();
             }
         }
-        if (now.isAfter(lastMinimumBalance.plusSeconds(1*60*60*24))) {
+        if (!lastMinimumBalance) {
+            if(balance.getAmount().compareTo(minimumBalance) >= 0){
+                lastMinimumBalance = true;
             balance.setAmount(balance.getAmount().subtract(penaltyFee));
-            lastMinimumBalance = now;
+            }
+
+        }else{
+            if(balance.getAmount().compareTo(minimumBalance) < 0){
+                lastMinimumBalance = false;
+            }
         }
+
     }
 }

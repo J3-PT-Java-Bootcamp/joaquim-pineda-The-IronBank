@@ -26,7 +26,7 @@ public class StudentAccount extends Account {
     @Min(0)
     private BigDecimal monthlyMaintenanceFee;
 
-    private Instant lastFee;
+    private Instant lastFee = Instant.now();
 
     public StudentAccount(String accountNumber, Money balance, String secretKey, String primaryOwner, String secondaryOwner, AccountType type, String createdBy, AccountStatus status, List<Transaction> from, List<Transaction> to, BigDecimal minimumBalance, BigDecimal monthlyMaintenanceFee) {
         super(accountNumber, balance, secretKey, primaryOwner, secondaryOwner, type, createdBy, status, from, to);

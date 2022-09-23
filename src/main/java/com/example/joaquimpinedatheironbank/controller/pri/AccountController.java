@@ -70,10 +70,10 @@ public class AccountController {
         return accountService.findAllAccounts();
     }
 
-    @GetMapping("/checkInterest")
-    public String checkInterest() {
+    @GetMapping("/check")
+    public ResponseEntity<?> checkInterest() {
         accountService.checkAllAccounts();
-        return "checkInterest";
+        return ResponseEntity.status(200).body("");
     }
 
 

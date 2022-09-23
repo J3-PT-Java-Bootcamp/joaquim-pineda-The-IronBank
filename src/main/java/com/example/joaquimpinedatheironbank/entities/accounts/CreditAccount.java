@@ -27,8 +27,8 @@ public class CreditAccount extends Account {
     private BigDecimal interestRate;
     @Min(0)
     private final BigDecimal penaltyFee = new BigDecimal(40);
-    private Instant lastFee;
-    private Instant lastInterest;
+    private Instant lastFee = Instant.now();
+    private Instant lastInterest = Instant.now();
     public CreditAccount(String accountNumber, Money balance, String secretKey, String primaryOwner, String secondaryOwner, AccountType type, String createdBy, AccountStatus status, List<Transaction> from, List<Transaction> to, BigDecimal creditLimit, BigDecimal interestRate) {
         super(accountNumber, balance, secretKey, primaryOwner, secondaryOwner, type, createdBy, status, from, to);
         this.creditLimit = creditLimit;
