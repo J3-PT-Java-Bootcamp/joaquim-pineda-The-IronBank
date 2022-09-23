@@ -5,7 +5,6 @@ import com.example.joaquimpinedatheironbank.entities.accounts.CheckingAccount;
 import com.example.joaquimpinedatheironbank.entities.accounts.CreditAccount;
 import com.example.joaquimpinedatheironbank.entities.accounts.SavingsAccount;
 import com.example.joaquimpinedatheironbank.entities.accounts.StudentAccount;
-import com.example.joaquimpinedatheironbank.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,6 @@ import lombok.Setter;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 
 @AllArgsConstructor
@@ -35,8 +33,6 @@ public class EditAccountRequest {
     private String secondaryOwner;
     @NotNull
     @NotBlank
-    private AccountType accountType;
-    private String createdBy;
     private BigDecimal penalityFee;
     private BigDecimal minimumBalance;
     private BigDecimal monthlyMaintenanceFee;
@@ -45,62 +41,102 @@ public class EditAccountRequest {
     private BigDecimal balance;
 
 
-    public SavingsAccount toSavingAccount() {
-        SavingsAccount savingsAccount = new SavingsAccount();
-        savingsAccount.setId(UUID.fromString(id));
-        savingsAccount.getAccountNumber();
-        savingsAccount.setBalance(new Money(balance));
-        savingsAccount.setSecretKey(secretKey);
-        savingsAccount.setPrimaryOwner(primaryOwner);
-        savingsAccount.setSecondaryOwner(secondaryOwner);
-        savingsAccount.setType(accountType);
-        savingsAccount.setCreatedBy(createdBy);
-        return savingsAccount;
+    public SavingsAccount toSavingAccount(SavingsAccount accountToUpdate) {
+
+        if (balance != null) {
+            accountToUpdate.setBalance(new Money(balance));
+        }
+        if (primaryOwner != null) {
+            accountToUpdate.setPrimaryOwner(primaryOwner);
+        }
+        if (secondaryOwner != null) {
+            accountToUpdate.setSecondaryOwner(secondaryOwner);
+        }
+
+
+        return accountToUpdate;
     }
 
-    public CreditAccount toCreditAccount() {
-        CreditAccount creditAccount = new CreditAccount();
-        creditAccount.setId(UUID.fromString(id));
-        creditAccount.getAccountNumber();
-        creditAccount.setBalance(new Money(balance));
-        creditAccount.setSecretKey(secretKey);
-        creditAccount.setPrimaryOwner(primaryOwner);
-        creditAccount.setSecondaryOwner(secondaryOwner);
-        creditAccount.setType(accountType);
-        creditAccount.setCreatedBy(createdBy);
-        creditAccount.setCreditLimit(creditLimit);
-        creditAccount.setInterestRate(interestRate);
-        return creditAccount;
+    public CreditAccount toCreditAccount(CreditAccount accountToUpdate) {
+        if (balance != null) {
+            accountToUpdate.setBalance(new Money(balance));
+        }
+        if (primaryOwner != null) {
+            accountToUpdate.setPrimaryOwner(primaryOwner);
+        }
+        if (secondaryOwner != null) {
+            accountToUpdate.setSecondaryOwner(secondaryOwner);
+        }
+        if (secretKey != null) {
+            accountToUpdate.setSecretKey(secretKey);
+        }
+        if (creditLimit != null) {
+            accountToUpdate.setCreditLimit(creditLimit);
+        }
+        if (interestRate != null) {
+            accountToUpdate.setInterestRate(interestRate);
+        }
+        return accountToUpdate;
     }
 
-    public CheckingAccount toCheckingAccount() {
-        CheckingAccount checkingAccount = new CheckingAccount();
-        checkingAccount.setId(UUID.fromString(id));
-        checkingAccount.getAccountNumber();
-        checkingAccount.setBalance(new Money(balance));
-        checkingAccount.setSecretKey(secretKey);
-        checkingAccount.setPrimaryOwner(primaryOwner);
-        checkingAccount.setSecondaryOwner(secondaryOwner);
-        checkingAccount.setType(accountType);
-        checkingAccount.setCreatedBy(createdBy);
-        checkingAccount.setPenaltyFee(penalityFee);
-        checkingAccount.setMinimumBalance(minimumBalance);
-        checkingAccount.setMonthlyMaintenanceFee(monthlyMaintenanceFee);
-        return checkingAccount;
+    public CheckingAccount toCheckingAccount(CheckingAccount accountToUpdate) {
+        if (balance != null) {
+            accountToUpdate.setBalance(new Money(balance));
+        }
+        if (primaryOwner != null) {
+            accountToUpdate.setPrimaryOwner(primaryOwner);
+        }
+        if (secondaryOwner != null) {
+            accountToUpdate.setSecondaryOwner(secondaryOwner);
+        }
+
+        if (monthlyMaintenanceFee != null) {
+            accountToUpdate.setMonthlyMaintenanceFee(monthlyMaintenanceFee);
+        }
+        if (minimumBalance != null) {
+            accountToUpdate.setMinimumBalance(minimumBalance);
+        }
+
+        if (secretKey != null) {
+            accountToUpdate.setSecretKey(secretKey);
+        }
+
+        if (penalityFee != null) {
+            accountToUpdate.setPenaltyFee(penalityFee);
+        }
+
+
+        return accountToUpdate;
     }
 
-    public StudentAccount toStudentAccount() {
-        StudentAccount studentAccount = new StudentAccount();
-        studentAccount.setId(UUID.fromString(id));
-        studentAccount.getAccountNumber();
-        studentAccount.setBalance(new Money(balance));
-        studentAccount.setSecretKey(secretKey);
-        studentAccount.setPrimaryOwner(primaryOwner);
-        studentAccount.setSecondaryOwner(secondaryOwner);
-        studentAccount.setType(accountType);
-        studentAccount.setCreatedBy(createdBy);
-        studentAccount.setMinimumBalance(minimumBalance);
-        studentAccount.setMonthlyMaintenanceFee(monthlyMaintenanceFee);
-        return studentAccount;
+    public StudentAccount toStudentAccount(StudentAccount accountToUpdate) {
+
+
+        if (balance != null) {
+            accountToUpdate.setBalance(new Money(balance));
+        }
+        if (primaryOwner != null) {
+            accountToUpdate.setPrimaryOwner(primaryOwner);
+        }
+        if (secondaryOwner != null) {
+            accountToUpdate.setSecondaryOwner(secondaryOwner);
+        }
+
+        if (monthlyMaintenanceFee != null) {
+            accountToUpdate.setMonthlyMaintenanceFee(monthlyMaintenanceFee);
+        }
+
+        if(secretKey != null){
+            accountToUpdate.setSecretKey(secretKey);
+        }
+
+        if(minimumBalance != null){
+
+            accountToUpdate.setMinimumBalance(minimumBalance);
+
+        }
+
+
+        return accountToUpdate;
     }
 }

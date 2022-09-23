@@ -9,13 +9,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateUserRequest {
+
+    String id;
     String username;
     String password;
     String email;
     String firstName;
     String lastName;
 
-    UserAddress address;
+    UserAddressRequest address;
     String role = "members";
 
     TypeOfUser typeOfUser;

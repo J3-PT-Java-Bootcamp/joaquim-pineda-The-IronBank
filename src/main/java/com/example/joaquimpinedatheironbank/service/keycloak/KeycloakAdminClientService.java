@@ -12,6 +12,7 @@ import com.example.joaquimpinedatheironbank.entities.users.UserAddress;
 import com.example.joaquimpinedatheironbank.enums.TypeOfUser;
 import com.example.joaquimpinedatheironbank.enums.UserRoles;
 import com.example.joaquimpinedatheironbank.http.requests.CreateUserRequest;
+import com.example.joaquimpinedatheironbank.http.requests.UserAddressRequest;
 import com.example.joaquimpinedatheironbank.service.email.EmailService;
 import com.example.joaquimpinedatheironbank.service.user.UserService;
 import lombok.extern.java.Log;
@@ -99,7 +100,7 @@ public class KeycloakAdminClientService {
                     user1.getUsername(),
                     user1.getTypeOfUser(),
                     user1.getHashedKey(),
-                    user1.getAddress(),
+                    UserAddressRequest.toUserAddress(user1.getAddress()),
                     user1.getBirthDate(),
                     user1.getFirstName(),
                     user1.getLastName()

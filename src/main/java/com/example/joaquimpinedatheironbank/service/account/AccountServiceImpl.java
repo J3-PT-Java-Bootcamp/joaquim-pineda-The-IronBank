@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -68,16 +69,16 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account updateAccount(EditAccountRequest account) {
-
-        switch (account.getAccountType()) {
+        Account accountToUpdate = accountRepository.findById(UUID.fromString(account.getId())).get();
+        switch (accountToUpdate.getType()) {
             case SAVINGS:
-                return savingsAccountRepository.save((SavingsAccount) account.toSavingAccount());
+                return savingsAccountRepository.save(account.toSavingAccount((SavingsAccount) accountToUpdate));
             case CREDIT:
-                return creditAccountRepository.save((CreditAccount) account.toCreditAccount());
+                return creditAccountRepository.save(account.toCreditAccount((CreditAccount) accountToUpdate));
             case CHECKING:
-                return checkingAccountRepository.save((CheckingAccount) account.toCheckingAccount());
+                return checkingAccountRepository.save(account.toCheckingAccount((CheckingAccount) accountToUpdate));
             case STUDENT:
-                return studentAccountRepository.save((StudentAccount) account.toStudentAccount());
+                return studentAccountRepository.save(account.toStudentAccount((StudentAccount) accountToUpdate));
             default:
                 throw new IllegalArgumentException("Invalid account type");
         }
@@ -123,8 +124,6 @@ public class AccountServiceImpl implements AccountService {
             savingsAccount.checkSavingsAccount();
             savingsAccountRepository.save(savingsAccount);
         }
-
-
 
 
     }

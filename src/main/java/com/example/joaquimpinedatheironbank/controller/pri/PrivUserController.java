@@ -54,6 +54,13 @@ public class PrivUserController {
 
 
     }
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<?> getAllUsers(Principal principal) {
+
+            return ResponseEntity.status(200).body(userService.getAllUsers());
+
+    }
+
 
 
 }

@@ -1,5 +1,6 @@
 package com.example.joaquimpinedatheironbank.http.requests;
 
+import com.example.joaquimpinedatheironbank.entities.users.UserAddress;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,14 @@ public class UserAddressRequest {
     private String state;
     private String zipCode;
     private String country;
+
+    public static UserAddress toUserAddress(UserAddressRequest userAddressRequest) {
+
+        return new UserAddress(userAddressRequest.getStreet(),
+                userAddressRequest.getCity(),
+                userAddressRequest.getState(),
+                userAddressRequest.getZipCode(),
+                userAddressRequest.getCountry());
+
+    }
 }
