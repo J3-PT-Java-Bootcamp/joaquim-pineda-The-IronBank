@@ -1,10 +1,12 @@
 package com.example.joaquimpinedatheironbank.service.transaction;
 
 import com.example.joaquimpinedatheironbank.entities.Money;
-import com.example.joaquimpinedatheironbank.entities.accounts.Account;
+import com.example.joaquimpinedatheironbank.entities.accounts.*;
 import com.example.joaquimpinedatheironbank.entities.transaction.Transaction;
+import com.example.joaquimpinedatheironbank.entities.users.User;
 import com.example.joaquimpinedatheironbank.enums.TransactionType;
 import com.example.joaquimpinedatheironbank.http.requests.MoneyTransferRequest;
+import com.example.joaquimpinedatheironbank.repository.accounts.CreditAccountRepository;
 import com.example.joaquimpinedatheironbank.repository.transactions.TransactionRepository;
 import com.example.joaquimpinedatheironbank.service.account.AccountService;
 import com.example.joaquimpinedatheironbank.service.user.UserService;
@@ -21,6 +23,7 @@ public class TransactionsServiceImpl implements TransactionsService {
 
     @Autowired
     AccountService accountService;
+
 
     @Autowired
     UserService userService;
@@ -41,7 +44,7 @@ public class TransactionsServiceImpl implements TransactionsService {
         try {
             to = accountService.findAccountNumber(moneyTransferRequest.getToAccount())
                     .orElseThrow(() -> new HttpClientErrorException(HttpStatus.NOT_FOUND));
-        }catch (HttpClientErrorException e){
+        } catch (HttpClientErrorException e) {
 
         }
         from.subtractBalance(moneyTransferRequest.getAmount());
@@ -54,11 +57,12 @@ public class TransactionsServiceImpl implements TransactionsService {
             transaction.setType(TransactionType.INTERNALTRANSFER);
             transaction.setDestinationAccount(to);
             to.addBalance(moneyTransferRequest.getAmount());
-            accountService.save(to);
+
         } else {
             transaction.setType(TransactionType.EXTERNALTRANSFER);
             transaction.setExternalDestinationAccount(moneyTransferRequest.getToAccount());
         }
+
         accountService.save(from);
         transactionRepository.save(transaction);
 
