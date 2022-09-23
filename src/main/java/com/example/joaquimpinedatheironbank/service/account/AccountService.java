@@ -4,7 +4,6 @@ import com.example.joaquimpinedatheironbank.dto.NewAccountDTO;
 import com.example.joaquimpinedatheironbank.entities.accounts.Account;
 import com.example.joaquimpinedatheironbank.http.requests.EditAccountRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,4 +20,6 @@ public interface AccountService {
 
     List<Account> findAllAccounts();
     List<Account> findAccountsOfUser(String id);
+
+    void checkAllAccounts();
 }

@@ -45,9 +45,12 @@ public class PubUserController {
 
     @PostMapping(value = "/create")
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequest user) {
-        user.setTypeOfUser(TypeOfUser.ACCOUNT_HOLDER);
+        if(user.getRole().equalsIgnoreCase(UserRoles.MEMBERS.toString())||user.getTypeOfUser().toString().equalsIgnoreCase(TypeOfUser.ACCOUNT_HOLDER.toString())){
+           
         Response createdResponse = kcAdminClient.createKeycloakUser(user, UserRoles.MEMBERS.name());
         return ResponseEntity.status(createdResponse.getStatus()).build();
+        }
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
 

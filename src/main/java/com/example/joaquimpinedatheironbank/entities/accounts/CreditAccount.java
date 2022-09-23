@@ -12,6 +12,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,8 @@ public class CreditAccount extends Account {
     private BigDecimal interestRate;
     @Min(0)
     private final BigDecimal penaltyFee = new BigDecimal(40);
-
+    private Instant lastFee;
+    private Instant lastInterest;
     public CreditAccount(String accountNumber, Money balance, String secretKey, String primaryOwner, String secondaryOwner, AccountType type, String createdBy, AccountStatus status, List<Transaction> from, List<Transaction> to, BigDecimal creditLimit, BigDecimal interestRate) {
         super(accountNumber, balance, secretKey, primaryOwner, secondaryOwner, type, createdBy, status, from, to);
         this.creditLimit = creditLimit;
@@ -37,5 +39,21 @@ public class CreditAccount extends Account {
     }
     public void setCreditLimit(BigDecimal creditLimit) {
         this.creditLimit = creditLimit;
+    }
+
+
+    public CreditAccount checkCreditAccount() {
+        Instant now = Instant.now();
+        if (now.isAfter(lastFee.plusSeconds(1*60*60*24*30))) {
+            if (balance.getAmount().compareTo(creditLimit) < 0) {
+                balance.setAmount(balance.getAmount().subtract(penaltyFee));
+                lastFee = now;
+            }
+        }
+        if (now.isAfter(lastInterest.plusSeconds(1*60*60*24*30))) {
+            balance.setAmount(balance.getAmount().add(balance.getAmount().multiply(interestRate)));
+            lastInterest = now;
+        }
+        return this;
     }
 }

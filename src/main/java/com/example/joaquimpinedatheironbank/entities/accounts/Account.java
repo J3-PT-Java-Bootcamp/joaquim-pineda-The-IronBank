@@ -33,7 +33,7 @@ public class Account implements AccountInterface {
     @GeneratedValue(generator = "AccountNumber")
     private String accountNumber;
     @Embedded
-    private Money balance;
+    protected Money balance;
     private String SecretKey;
     private String PrimaryOwner;
     private String SecondaryOwner;

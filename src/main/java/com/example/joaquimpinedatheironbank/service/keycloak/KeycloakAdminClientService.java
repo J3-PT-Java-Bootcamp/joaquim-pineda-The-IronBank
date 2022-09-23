@@ -125,20 +125,20 @@ public class KeycloakAdminClientService {
     }
 
     public UserAutorities getUser(String userId) {
-        ArrayList<String> roles = new ArrayList<>();
+        ArrayList<UserRoles> roles = new ArrayList<>();
         var adminKeycloak = kcProvider.getInstance();
         UsersResource usersResource = kcProvider.getInstance().realm(realm).users();
         var pepito = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         pepito.forEach(temp -> {
             switch (temp.getAuthority()) {
                 case "ROLE_admin":
-                    roles.add(UserRoles.ADMINS.name());
+                    roles.add(UserRoles.ADMINS);
                     break;
                 case "ROLE_moderator":
-                    roles.add(UserRoles.MANAGERS.name());
+                    roles.add(UserRoles.MANAGERS);
                     break;
                 case "ROLE_member":
-                    roles.add(UserRoles.MEMBERS.name());
+                    roles.add(UserRoles.MEMBERS);
                     break;
             }
         });
