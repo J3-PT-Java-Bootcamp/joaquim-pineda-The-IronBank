@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "482d4a89-de4d-4d87-a07c-c6723631ee7f",
+		"name": "ironbank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8465349"
+	},
+	"item": [
+		{
+			"name": "new user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"joaquimadmin\",\n    \"password\":\"aaaa324324234a3a2aaa\",\n    \"email\":\"joaquimspam@gmail.com\",\n    \"firstName\":\"joaquim\",\n    \"lastName\":\"pineda\",\n    \"typeOfUser\":\"ACCOUNT_HOLDER\",\n    \"birthDate\":\"2022/05/02\",\n    \"hashedKey\":\"aaaaaaaaaaaaaaaaaaaaaaa\",\n    \"address\":{\n        \"street\":\"micalle\",\n        \"city\":\"parets\",\n        \"state\":\"barcelona\",\n        \"zipCode\":\"24234\",\n        \"country\":\"spain\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/user/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"joaquimadmin\",\n    \"password\":\"aaaa324324234a3a2aaa\"\n\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/user/get-token",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"user",
+						"get-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"joaquimadmin\",\n    \"password\":\"aaaa\",\n    \"email\":\"joaquimspam@gmail.com\",\n    \"firstname\":\"firstname\",\n    \"lastname\":\"lastname\",\n    \"role\":\"ADMINS\",\n       \"address\":{\n        \"street\":\"micalle\",\n        \"city\":\"parets\",\n        \"state\":\"barcelona\",\n        \"zipCode\":\"24234\",\n        \"country\":\"spain\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/pri/user/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"pri",
+						"user",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "account transfer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromAccount\":\"958059840\",\n    \"OwnerOfToAccount\":\"joaquimadmi1an\",\n    \"toAccount\":\"29555511696\",\n    \"amount\":10,\n    \"description\":\"test transaction\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/pri/transactions/transfer",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"pri",
+						"transactions",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllAccounts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromAccount\":\"38011996\",\n    \"OwnerOfToAccount\":\"joaquim1\",\n    \"toAccount\":\"251079812\",\n    \"amount\":10,\n    \"description\":\"test transaction\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/pri/account/getAll",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"pri",
+						"account",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkAccounts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromAccount\":\"38011996\",\n    \"OwnerOfToAccount\":\"joaquim1\",\n    \"toAccount\":\"251079812\",\n    \"amount\":10,\n    \"description\":\"test transaction\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/pri/account/check",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"pri",
+						"account",
+						"check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/pri/user/getAllUsers",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"pri",
+						"user",
+						"getAllUsers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get accounts Of user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fromAccount\":\"38011996\",\n    \"OwnerOfToAccount\":\"joaquim1\",\n    \"toAccount\":\"251079812\",\n    \"amount\":10,\n    \"description\":\"test transaction\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/pri/account/get?id=2bd53eef-f0cc-4d97-83be-a24b3360ab6c",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"pri",
+						"account",
+						"get"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2bd53eef-f0cc-4d97-83be-a24b3360ab6c"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"secretKey\":\"aaa\",\n    \"primaryOwner\":\"4505b14e-45b5-462d-b02f-936d1a37039a\",\n    \"secundaryOwner\":\"\",\n    \"accountType\":\"CHECKING\",\n    \"penalityFee\":0.12,\n    \"monthlyMaintenanceFee\" :1,\n    \"minimumBalance\" :40,\n    \"creditLimit\" :41,\n    \"interestRate\" :4\n\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/pri/account/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"pri",
+						"account",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit account",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n   \"id\": \"780b1fec-c869-4f80-8541-3c56306af6de\",\n    \"accountNumber\": \"745960882\",\n    \"balance\": 22,\n    \"status\": \"ACTIVE\",\n    \"monthlyMaintenanceFee\": 1,\n    \"minimumBalance\": 40,\n    \"penaltyFee\": 0.12,\n    \"lastFee\": null,\n    \"lastMinimumBalance\": null,\n    \"primaryOwner\": \"4505b14e-45b5-462d-b02f-936d1a37039a\",\n    \"secondaryOwner\": null,\n    \"secretKey\": \"aaa3322233\",\n    \"createdBy\": \"fe0302b8-7dac-4ac8-b305-7a6a211c2d85\",\n    \"closed\": false,\n    \"frozen\": false,\n    \"active\": true\n\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/pri/account/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"pri",
+						"account",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ2eUEzZlJ5TkdfWHlUMy1MRzVQcjlVck5nTHQ2eWMzY2hNdnlyVGdITXNRIn0.eyJleHAiOjE2NjQzOTk0MjAsImlhdCI6MTY2Mzk2NzQyMCwianRpIjoiZWMzMWFjNzgtOWI4Ny00ZTk5LTg4NTUtYTc3MmUwMGViNDg3IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MTE4L3JlYWxtcy9pcm9uYmFuayIsInN1YiI6IjQzYjJkZDQyLTI3NWYtNDdmYS1hNjU0LWE4YmNkMTBjMDMyYyIsInR5cCI6IkJlYXJlciIsImF6cCI6InNwcmluZy1ib290LWNsaWVudCIsInNlc3Npb25fc3RhdGUiOiIxYWI1NWIxNi05MDZkLTRlNDMtOTgwMy03ZWEyMmNkOTI0M2UiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJkZWZhdWx0LXJvbGVzLWlyb25iYW5rIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsic3ByaW5nLWJvb3QtY2xpZW50Ijp7InJvbGVzIjpbIm1vZGVyYXRvciIsIm1lbWJlciIsImFkbWluIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiMWFiNTViMTYtOTA2ZC00ZTQzLTk4MDMtN2VhMjJjZDkyNDNlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiam9hcXVpbSBwaW5lZGEiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqb2FxdWltYWRtaW4iLCJnaXZlbl9uYW1lIjoiam9hcXVpbSIsImZhbWlseV9uYW1lIjoicGluZWRhIiwiZW1haWwiOiJqb2FxdWltc3BhbUBnbWFpbC5jb20ifQ.n73B_RwRyGvGn1qMpvlzkDjerjBmpR2YaCk5CoEMvwHk5HORi812Urr1gpPBU4Wrj81VyfgmRv-8XRe5ofI39WRnp1BQDRRj16AAFytmKUiHSzeeOQClO6Na9tx9gX8mKjRIMRB76EfAbL-bbIUEAVyojat5pNoF1MLn_Aqgd33qcvnmTGiEU85rkaSHUsqf_TEVB7m-YJIVH8hTzQjhGjI3lCMlZPde1xS8piOHyeiosOe_jpcWc5xT0vZfkJaroj7NRAF6atKP1_PhC3LVQE6BlugkH0JnKnd_b1pTTib8VG6k6yfy7rNQvSueTCnymTD_xgIR02qPdNhZT7poZQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
